@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TicketType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class TicketTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        TicketType::factory(10)->create();
     }
 }
