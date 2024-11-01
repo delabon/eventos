@@ -27,9 +27,12 @@ class EventController extends Controller
         return $event;
     }
 
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(UpdateEventRequest $request, Event $event): Event
     {
-        //
+
+        $event->update($request->validated());
+
+        return $event;
     }
 
     public function destroy(Event $event)

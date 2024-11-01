@@ -28,8 +28,8 @@ class Event extends Model
     {
         return [
             'status' => EventStatus::class,
-            'start_at' => 'date',
-            'end_at' => 'date',
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
         ];
     }
 
