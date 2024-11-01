@@ -35,8 +35,12 @@ class EventController extends Controller
         return $event;
     }
 
-    public function destroy(Event $event)
+    public function destroy(Event $event): array
     {
-        //
+        $event->delete();
+
+        return [
+            'success' => true
+        ];
     }
 }
