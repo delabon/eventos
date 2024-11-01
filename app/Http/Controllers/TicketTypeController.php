@@ -28,9 +28,11 @@ class TicketTypeController extends Controller
         return $ticketType;
     }
 
-    public function update(UpdateTicketTypeRequest $request, TicketType $ticketType)
+    public function update(UpdateTicketTypeRequest $request, TicketType $ticketType): TicketType
     {
-        //
+        $ticketType->update($request->validated());
+
+        return $ticketType;
     }
 
     public function destroy(TicketType $ticketType)

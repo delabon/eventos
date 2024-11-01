@@ -18,3 +18,5 @@ Route::delete('/events/{event}', [EventController::class, 'destroy'])->middlewar
 Route::get('/ticket-types', [TicketTypeController::class, 'index']);
 Route::get('/ticket-types/{ticketType}', [TicketTypeController::class, 'show']);
 Route::post('/ticket-types', [TicketTypeController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/ticket-types/{ticketType}', [TicketTypeController::class, 'update'])->middleware('auth:sanctum')->can('update', 'ticketType');
+Route::patch('/ticket-types/{ticketType}', [TicketTypeController::class, 'update'])->middleware('auth:sanctum')->can('update', 'ticketType');

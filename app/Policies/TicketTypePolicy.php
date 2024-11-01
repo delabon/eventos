@@ -13,7 +13,7 @@ class TicketTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class TicketTypePolicy
      */
     public function view(User $user, TicketType $ticketType): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class TicketTypePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class TicketTypePolicy
      */
     public function update(User $user, TicketType $ticketType): bool
     {
-        //
+        return $user->id === $ticketType->user->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class TicketTypePolicy
      */
     public function delete(User $user, TicketType $ticketType): bool
     {
-        //
+        return $this->update($user, $ticketType);
     }
 
     /**
@@ -53,7 +53,7 @@ class TicketTypePolicy
      */
     public function restore(User $user, TicketType $ticketType): bool
     {
-        //
+        return $this->update($user, $ticketType);
     }
 
     /**
@@ -61,6 +61,6 @@ class TicketTypePolicy
      */
     public function forceDelete(User $user, TicketType $ticketType): bool
     {
-        //
+        return $this->update($user, $ticketType);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EventBelongsToUser;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTicketTypeRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateTicketTypeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,10 @@ class UpdateTicketTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'quantity' => ['required', 'integer', 'min:1'],
+            'max_quantity_per_person' => ['required', 'integer', 'min:1', 'lte:quantity'],
         ];
     }
 }
