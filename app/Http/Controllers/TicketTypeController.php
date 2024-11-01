@@ -28,9 +28,9 @@ class TicketTypeController extends Controller
         return $ticketType;
     }
 
-    public function show(TicketType $ticketType)
+    public function show(TicketType $ticketType): TicketType
     {
-        //
+        return $ticketType;
     }
 
     public function update(UpdateTicketTypeRequest $request, TicketType $ticketType)
