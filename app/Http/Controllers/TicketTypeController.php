@@ -5,44 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTicketTypeRequest;
 use App\Http\Requests\UpdateTicketTypeRequest;
 use App\Models\TicketType;
+use Illuminate\Database\Eloquent\Collection;
 
 class TicketTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): Collection
     {
-        //
+        return TicketType::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreTicketTypeRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(TicketType $ticketType)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateTicketTypeRequest $request, TicketType $ticketType)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(TicketType $ticketType)
     {
         //

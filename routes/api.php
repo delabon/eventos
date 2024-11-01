@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketTypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -13,3 +14,5 @@ Route::post('/events', [EventController::class, 'store'])->middleware('auth:sanc
 Route::put('/events/{event}', [EventController::class, 'update'])->middleware('auth:sanctum')->can('update', 'event');
 Route::patch('/events/{event}', [EventController::class, 'update'])->middleware('auth:sanctum')->can('update', 'event');
 Route::delete('/events/{event}', [EventController::class, 'destroy'])->middleware('auth:sanctum')->can('delete', 'event');
+
+Route::get('/ticket-types', [TicketTypeController::class, 'index']);
