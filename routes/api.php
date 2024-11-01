@@ -20,3 +20,4 @@ Route::get('/ticket-types/{ticketType}', [TicketTypeController::class, 'show']);
 Route::post('/ticket-types', [TicketTypeController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/ticket-types/{ticketType}', [TicketTypeController::class, 'update'])->middleware('auth:sanctum')->can('update', 'ticketType');
 Route::patch('/ticket-types/{ticketType}', [TicketTypeController::class, 'update'])->middleware('auth:sanctum')->can('update', 'ticketType');
+Route::delete('/ticket-types/{ticketType}', [TicketTypeController::class, 'destroy'])->middleware('auth:sanctum')->can('delete', 'ticketType');

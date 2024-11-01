@@ -35,8 +35,12 @@ class TicketTypeController extends Controller
         return $ticketType;
     }
 
-    public function destroy(TicketType $ticketType)
+    public function destroy(TicketType $ticketType): array
     {
-        //
+        $ticketType->delete();
+
+        return [
+            'success' => true
+        ];
     }
 }
