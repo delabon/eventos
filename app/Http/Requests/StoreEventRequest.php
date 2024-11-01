@@ -24,7 +24,6 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'exists:users,id'],
             'status' => ['required', Rule::enum(EventStatus::class)],
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:5000'],
