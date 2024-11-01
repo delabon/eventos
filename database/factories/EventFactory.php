@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,15 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'name' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(),
+            'country' => $this->faker->country(),
+            'address' => $this->faker->address(),
+            'city' => $this->faker->city(),
+            'postal_code' => $this->faker->postcode(),
+            'start_at' => $this->faker->dateTimeBetween('now', '+1 year'),
+            'end_at' => $this->faker->dateTimeBetween('now', '+1 year'),
         ];
     }
 }
