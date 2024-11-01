@@ -22,9 +22,9 @@ class EventController extends Controller
         return $event;
     }
 
-    public function show(Event $event)
+    public function show(Event $event): Event
     {
-        //
+        return $event;
     }
 
     public function update(UpdateEventRequest $request, Event $event)
