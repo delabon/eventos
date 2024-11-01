@@ -14,9 +14,12 @@ class EventController extends Controller
         return Event::all();
     }
 
-    public function store(StoreEventRequest $request)
+    public function store(StoreEventRequest $request): Event
     {
-        //
+        /** @var Event $event */
+        $event = Event::create($request->validated());
+
+        return $event;
     }
 
     public function show(Event $event)

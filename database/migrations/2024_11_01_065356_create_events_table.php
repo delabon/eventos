@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\EventStatus;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->index()->constrained();
             $table->string('name');
             $table->text('description');
+            $table->string('status')->default(EventStatus::Draft);
             $table->string('country');
             $table->string('address');
             $table->string('city');

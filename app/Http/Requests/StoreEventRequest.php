@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\EventStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEventRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,16 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required', 'exists:users,id'],
+            'status' => ['required', Rule::enum(EventStatus::class)],
+            'name' => ['required', 'max:255'],
+            'description' => ['required', 'max:5000'],
+            'country' => ['required', 'max:255'],
+            'address' => ['required', 'max:255'],
+            'city' => ['required', 'max:255'],
+            'postal_code' => ['required', 'max:255'],
+            'start_at' => ['required', 'date'],
+            'end_at' => ['required', 'date'],
         ];
     }
 }
