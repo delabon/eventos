@@ -30,7 +30,6 @@ class EventController extends Controller
 
     public function update(UpdateEventRequest $request, Event $event): Event
     {
-
         $event->update($request->validated());
 
         return $event;
