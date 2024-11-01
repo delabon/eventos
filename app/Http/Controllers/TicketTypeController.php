@@ -14,9 +14,18 @@ class TicketTypeController extends Controller
         return TicketType::all();
     }
 
-    public function store(StoreTicketTypeRequest $request)
+    public function store(StoreTicketTypeRequest $request): TicketType
     {
-        //
+        $ticketType = new TicketType();
+        $ticketType->user_id = $request->user()->id;
+        $ticketType->event_id = $request->event_id;
+        $ticketType->name = $request->name;
+        $ticketType->price = $request->price;
+        $ticketType->quantity = $request->quantity;
+        $ticketType->max_quantity_per_person = $request->max_quantity_per_person;
+        $ticketType->save();
+
+        return $ticketType;
     }
 
     public function show(TicketType $ticketType)

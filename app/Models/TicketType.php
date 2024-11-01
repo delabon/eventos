@@ -11,6 +11,15 @@ class TicketType extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'user_id',
+        'event_id',
+        'name',
+        'price',
+        'quantity',
+        'max_quantity_per_person',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
