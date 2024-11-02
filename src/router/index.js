@@ -33,18 +33,29 @@ const router = createRouter({
       path: '/events/create',
       name: 'createEvent',
       component: CreateEventView,
+      meta: {
+        auth: true
+      }
     },
   ]
 })
 
 router.beforeEach(async (to) => {
-  if (to.meta.guest)  {
+  if (to.meta.guest || to.meta.auth)  {
     const authStore = useAuthStore();
     await authStore.getUser()
 
-    if (authStore.user) {
-      return {
-        name: 'home'
+    if (to.meta.guest) {
+      if (authStore.user) {
+        return {
+          name: 'home'
+        }
+      }
+    } else if (to.meta.auth) {
+      if (!authStore.user) {
+        return {
+          name: 'login'
+        }
       }
     }
   }
