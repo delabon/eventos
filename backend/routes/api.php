@@ -11,6 +11,7 @@ Route::delete('/logout', [AuthController::class, 'logout'])->middleware('auth:sa
 Route::post('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
 Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/mine', [EventController::class, 'myEvents'])->middleware('auth:sanctum');
 Route::get('/events/{event}', [EventController::class, 'show']);
 Route::post('/events', [EventController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/events/{event}', [EventController::class, 'update'])->middleware('auth:sanctum')->can('update', 'event');

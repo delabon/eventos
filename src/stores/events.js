@@ -17,6 +17,19 @@ export const useEventsStore = defineStore('eventsStore', {
                 return data
             }
         },
+        async getMyEvents () {
+            const res = await fetch('/api/events/mine', {
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                return data
+            }
+        },
         async getEvent (id) {
             const res = await fetch(`/api/events/${id}`, {
                 method: 'get'

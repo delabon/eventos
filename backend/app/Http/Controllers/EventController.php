@@ -6,12 +6,18 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index(): Collection
     {
         return Event::with('user')->latest()->get();
+    }
+
+    public function myEvents(Request $request): Collection
+    {
+        return Event::with('user')->where('user_id', $request->user()->id)->latest()->get();
     }
 
     public function store(StoreEventRequest $request): array

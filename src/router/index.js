@@ -6,6 +6,7 @@ import {useAuthStore} from "@/stores/auth.js";
 import CreateEventView from "@/views/Events/CreateEventView.vue";
 import ShowEventView from "@/views/Events/ShowEventView.vue";
 import UpdateEventView from "@/views/Events/UpdateEventView.vue";
+import MyEventsView from "@/views/Events/MyEventsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,6 +49,14 @@ const router = createRouter({
       path: '/events/edit/:id',
       name: 'updateEvent',
       component: UpdateEventView,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/my-events',
+      name: 'myEvents',
+      component: MyEventsView,
       meta: {
         auth: true
       }

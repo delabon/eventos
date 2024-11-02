@@ -6,6 +6,7 @@
 
         <div v-if="authStore.user">
           <div class="inline-flex items-center space-x-6">
+            <RouterLink :to="{name: 'myEvents'}" class="nav-link">My Events</RouterLink>
             <RouterLink :to="{name: 'createEvent'}" class="nav-link">New Event</RouterLink>
 
             <form @submit.prevent="authStore.logout">
