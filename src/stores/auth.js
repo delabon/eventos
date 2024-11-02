@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('authStore', {
 
                 const data = await res.json();
 
-                if (res.ok) {
+                if (res.ok && !data.errors) {
                     this.user = data;
                     this.errors = {}
                 }
@@ -33,16 +33,16 @@ export const useAuthStore = defineStore('authStore', {
             const data = await res.json();
 
             if (res.ok) {
+                localStorage.setItem('token', data.token);
+                this.user = data;
+                this.errors = {}
+
+                this.router.push({
+                    name: 'home'
+                })
+            } else {
                 if (data.errors) {
                     this.errors = data.errors;
-                } else {
-                    localStorage.setItem('token', data.token);
-                    this.user = data;
-                    this.errors = {}
-
-                    this.router.push({
-                        name: 'home'
-                    })
                 }
             }
         },

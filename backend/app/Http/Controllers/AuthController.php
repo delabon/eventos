@@ -27,19 +27,19 @@ class AuthController extends Controller
         ];
     }
 
-    public function login(LoginUserRequest $request): array
+    public function login(LoginUserRequest $request): array|JsonResponse
     {
         /** @var User $user */
         $user = User::query()->where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return [
+            return new JsonResponse([
                 'errors' => [
                     'email' => [
                         'Invalid credentials'
                     ]
                 ]
-            ];
+            ], Response::HTTP_FORBIDDEN);
         }
 
         $token = $user->createToken($user->email . $user->password);

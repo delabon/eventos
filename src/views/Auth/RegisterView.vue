@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {onMounted, reactive} from "vue";
 import {useAuthStore} from "@/stores/auth.js";
 import {storeToRefs} from "pinia";
 
@@ -37,6 +37,10 @@ const formData = reactive({
   email: "",
   password: "",
   password_confirmation: ""
+})
+
+onMounted(() => {
+  errors.value = {}
 })
 </script>
 
