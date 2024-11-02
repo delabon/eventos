@@ -14,13 +14,16 @@ class EventController extends Controller
         return Event::all();
     }
 
-    public function store(StoreEventRequest $request): Event
+    public function store(StoreEventRequest $request): array
     {
         $event = Event::make($request->validated());
         $event->user_id = $request->user()->id;
         $event->save();
 
-        return $event;
+        return [
+            'event' => $event,
+            'user' => $event->user
+        ];
     }
 
     public function show(Event $event): Event
