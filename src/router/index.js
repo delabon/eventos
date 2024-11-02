@@ -41,21 +41,19 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  if (to.meta.guest || to.meta.auth)  {
-    const authStore = useAuthStore();
-    await authStore.getUser()
+  const authStore = useAuthStore();
+  await authStore.getUser()
 
-    if (to.meta.guest) {
-      if (authStore.user) {
-        return {
-          name: 'home'
-        }
+  if (to.meta.guest) {
+    if (authStore.user) {
+      return {
+        name: 'home'
       }
-    } else if (to.meta.auth) {
-      if (!authStore.user) {
-        return {
-          name: 'login'
-        }
+    }
+  } else if (to.meta.auth) {
+    if (!authStore.user) {
+      return {
+        name: 'login'
       }
     }
   }

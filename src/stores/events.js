@@ -6,6 +6,16 @@ export const useEventsStore = defineStore('eventsStore', {
         errors: {}
     }),
     actions: {
+        async getEvents () {
+            const res = await fetch('/api/events', {
+                method: 'get'
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                return data
+            }
+        },
         async createEvent (formData){
             const res = await fetch('/api/events', {
                 method: 'post',

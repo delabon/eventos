@@ -11,7 +11,7 @@ class EventController extends Controller
 {
     public function index(): Collection
     {
-        return Event::all();
+        return Event::with('user')->latest()->get();
     }
 
     public function store(StoreEventRequest $request): array
