@@ -6,12 +6,12 @@
       <div v-for="event in events" :key="event.id" class="border-l-4 border-blue-500 pl-4 mb-8">
         <h2 class="font-bold text-xl">{{ event.name }}</h2>
         <p class="text-xs text-slate-600 mb-4">
-          Posted by {{ event.user.name }}
+          Created by <strong>{{ event.user.name }}</strong>
         </p>
         <p>
           {{ event.description }}
           <br>
-          <RouterLink :to="{show: 'showEvent', params: {id: event.id}}" class="text-blue-500 underline">Go to event</RouterLink>
+          <RouterLink :to="{name: 'showEvent', params: {id: event.id}}" class="text-blue-500 underline">Go to event</RouterLink>
         </p>
       </div>
     </div>
@@ -23,6 +23,7 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
+import {RouterLink} from "vue-router";
 import {useEventsStore} from "@/stores/events.js";
 
 const {getEvents} = useEventsStore();

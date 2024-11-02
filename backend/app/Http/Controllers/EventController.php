@@ -26,9 +26,12 @@ class EventController extends Controller
         ];
     }
 
-    public function show(Event $event): Event
+    public function show(Event $event): array
     {
-        return $event;
+        return [
+            'event' => $event,
+            'user' => $event->user
+        ];
     }
 
     public function update(UpdateEventRequest $request, Event $event): Event

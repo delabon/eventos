@@ -1,8 +1,8 @@
 <template>
   <main>
-    <h1 class="title">Create event</h1>
+    <h1 class="title">Update event</h1>
 
-    <form @submit.prevent="createEvent(formData)" class="w-1/2 mx-auto space-y-6">
+    <form @submit.prevent="updateEvent(eventData, formData)" class="w-1/2 mx-auto space-y-6">
       <div>
         <strong>Name</strong>
         <input type="text" placeholder="Name" v-model="formData.name">
@@ -54,16 +54,20 @@
         <input id="event-ent-at" type="datetime-local" v-model="formData.end_at" class="w-full border rounded p-1">
         <p v-if="errors.end_at" class="error">{{ errors.end_at[0] }}</p>
       </div>
-      <button class="primary-btn">Create</button>
+      <button class="primary-btn">Update</button>
     </form>
   </main>
 </template>
 
 <script setup>
-import {reactive, watch} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import {useEventsStore} from "@/stores/events.js";
 import {storeToRefs} from "pinia";
+import {useRoute, useRouter} from "vue-router";
+import {useAuthStore} from "@/stores/auth.js";
 
+const route = useRoute()
+const router = useRouter()
 const formData = reactive({
   name: '',
   description: '',
@@ -77,7 +81,41 @@ const formData = reactive({
 });
 
 const {errors} = storeToRefs(useEventsStore())
-const {createEvent} = useEventsStore();
+const {updateEvent, getEvent} = useEventsStore();
+const authStore = useAuthStore();
+const eventData = ref({
+  id: null,
+  user_id: null,
+})
+
+function formatDateToLocalInput(date) {
+  const d = new Date(date);
+  const pad = (n) => n.toString().padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+onMounted(async () => {
+  errors.value = {};
+  const eventObj = await getEvent(route.params.id);
+
+  if (authStore.user.id !== eventObj.user_id) {
+    router.push({ name: 'home' })
+    return
+  }
+
+  formData.name = eventObj.name;
+  formData.description = eventObj.description;
+  formData.status = eventObj.status;
+  formData.country = eventObj.country;
+  formData.address = eventObj.address;
+  formData.city = eventObj.city;
+  formData.postal_code = eventObj.postal_code;
+  formData.start_at = formatDateToLocalInput(eventObj.start_at);
+  formData.end_at = formatDateToLocalInput(eventObj.end_at);
+
+  eventData.value.id = eventObj.id;
+  eventData.value.user_id = eventObj.user_id;
+})
 
 watch(() => formData.start_at, (newStartAt) => {
   if (formData.end_at < newStartAt) {
