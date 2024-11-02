@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -32,8 +34,11 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return [
-                'success' => false,
-                'message' => 'Invalid user credentials.',
+                'errors' => [
+                    'email' => [
+                        'Invalid credentials'
+                    ]
+                ]
             ];
         }
 
@@ -53,6 +58,15 @@ class AuthController extends Controller
 
         return [
             'success' => true
+        ];
+    }
+
+    public function user(Request $request): array
+    {
+        return [
+            'id' => $request->user()->id,
+            'name' => $request->user()->name,
+            'email' => $request->user()->email,
         ];
     }
 }

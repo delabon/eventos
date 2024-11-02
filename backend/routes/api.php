@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::delete('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/{event}', [EventController::class, 'show']);
