@@ -118,12 +118,7 @@ export const useEventsStore = defineStore('eventsStore', {
                 alert(errorMessage);
             } else {
                 this.errors = {};
-                this.router.push({
-                    name: 'myEvents',
-                    query: {
-                        reload: new Date().getTime()
-                    }
-                })
+                location.reload()
             }
         },
         async updateEvent (eventData, formData, ticketTypes){
