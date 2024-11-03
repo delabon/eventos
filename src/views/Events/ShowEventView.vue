@@ -5,7 +5,9 @@
                 <h1 class="font-bold text-3xl">{{ event.name }}</h1>
                 <p class="text-xs text-slate-600 my-4">
                     Created by <strong>{{ event.user.name }}</strong><br>
-                    Status <strong>{{ event.status }}</strong>
+                    Status <strong>{{ event.status }}</strong><br>
+                    Starts <strong>{{ formatDateTime(event.start_at) }}</strong><br>
+                    Ends <strong>{{ formatDateTime(event.end_at) }}</strong>
                 </p>
                 <p>
                     {{ event.description }}
@@ -49,6 +51,10 @@ onMounted(async () => {
         ticketTypes.value = await getTicketTypes(event.value.id);
     }
 })
+
+const formatDateTime = (date) => {
+    return new Date(date).toLocaleString()
+}
 
 const reserveTicket = () => {
     alert('Coming Soon!')
