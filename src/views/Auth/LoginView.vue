@@ -1,20 +1,20 @@
 <template>
-  <main>
-    <h1 class="title">Login</h1>
+    <main>
+        <h1 class="title">Login</h1>
 
-    <form @submit.prevent="() => authenticate('login', formData)" class="w-1/2 mx-auto space-y-6">
-      <div>
-        <input type="email" placeholder="Email" v-model="formData.email">
-        <p v-if="errors.email" class="error">{{ errors.email[0] }}</p>
-      </div>
-      <div>
-        <input type="password" placeholder="Password" v-model="formData.password">
-        <p v-if="errors.password" class="error">{{ errors.password[0] }}</p>
-      </div>
+        <form @submit.prevent="() => authenticate('login', formData)" class="w-1/2 mx-auto space-y-6">
+            <div>
+                <input type="email" placeholder="Email" v-model="formData.email">
+                <p v-if="errors.email" class="error">{{ errors.email[0] }}</p>
+            </div>
+            <div>
+                <input type="password" placeholder="Password" v-model="formData.password">
+                <p v-if="errors.password" class="error">{{ errors.password[0] }}</p>
+            </div>
 
-      <button class="primary-btn">Login</button>
-    </form>
-  </main>
+            <button class="primary-btn">Login</button>
+        </form>
+    </main>
 </template>
 
 <script setup>
@@ -26,15 +26,11 @@ const {errors} = storeToRefs(useAuthStore());
 const {authenticate} = useAuthStore();
 
 const formData = reactive({
-  email: "",
-  password: "",
+    email: "",
+    password: "",
 })
 
 onMounted(() => {
-  errors.value = {}
+    errors.value = {}
 })
 </script>
-
-<style scoped>
-
-</style>

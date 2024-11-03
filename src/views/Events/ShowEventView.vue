@@ -1,35 +1,35 @@
 <template>
-  <main>
-    <div v-if="event">
-      <div class="border-l-4 border-blue-500 pl-4 mt-12">
-        <h1 class="font-bold text-3xl">{{ event.name }}</h1>
-        <p class="text-xs text-slate-600 my-4">
-          Created by <strong>{{ event.user.name }}</strong><br>
-          Status <strong>{{ event.status }}</strong>
-        </p>
-        <p>
-          {{ event.description }}
-        </p>
-      </div>
+    <main>
+        <div v-if="event">
+            <div class="border-l-4 border-blue-500 pl-4 mt-12">
+                <h1 class="font-bold text-3xl">{{ event.name }}</h1>
+                <p class="text-xs text-slate-600 my-4">
+                    Created by <strong>{{ event.user.name }}</strong><br>
+                    Status <strong>{{ event.status }}</strong>
+                </p>
+                <p>
+                    {{ event.description }}
+                </p>
+            </div>
 
-      <div v-if="ticketTypes.length" class="mt-12">
-        <h3 class="font-bold text-xl">Ticket types</h3>
+            <div v-if="ticketTypes.length" class="mt-12">
+                <h3 class="font-bold text-xl">Ticket types</h3>
 
-        <div class="grid grid-cols-4 gap-7 mt-6">
-          <div v-for="ticketType in ticketTypes" class="border-l-4 border-blue-500 pl-4 mt-6">
-            <strong>{{ ticketType.name }}</strong>
-            <p>Price: ${{ ticketType.price }}</p>
-            <p>Quantity: {{ ticketType.quantity }}</p>
-            <p>Max tickets per person: {{ ticketType.max_quantity_per_person }}</p>
-            <button class="primary-btn mt-3" @click.prevent="reserveTicket">Reserve</button>
-          </div>
+                <div class="grid grid-cols-4 gap-7 mt-6">
+                    <div v-for="ticketType in ticketTypes" class="border-l-4 border-blue-500 pl-4 mt-6">
+                        <strong>{{ ticketType.name }}</strong>
+                        <p>Price: ${{ ticketType.price }}</p>
+                        <p>Quantity: {{ ticketType.quantity }}</p>
+                        <p>Max tickets per person: {{ ticketType.max_quantity_per_person }}</p>
+                        <button class="primary-btn mt-3" @click.prevent="reserveTicket">Reserve</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div v-else>
-      <h2>Event does not exist.</h2>
-    </div>
-  </main>
+        <div v-else>
+            <h2>Event does not exist.</h2>
+        </div>
+    </main>
 </template>
 
 <script setup>
@@ -43,11 +43,11 @@ const event = ref(null)
 const ticketTypes = ref([])
 
 onMounted(async () => {
-  event.value = await getEvent(route.params.id);
+    event.value = await getEvent(route.params.id);
 
-  if (event.value) {
-    ticketTypes.value = await getTicketTypes(event.value.id);
-  }
+    if (event.value) {
+        ticketTypes.value = await getTicketTypes(event.value.id);
+    }
 })
 
 const reserveTicket = () => {
