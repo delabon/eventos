@@ -2,27 +2,35 @@
   <main>
     <h1 class="title">My events</h1>
 
-    <div v-if="events.length">
-      <div v-for="event in events" :key="event.id" class="border-l-4 border-blue-500 pl-4 mb-8">
-        <h2 class="font-bold text-xl">{{ event.name }}</h2>
-        <p class="text-xs text-slate-600 mb-4">
-          Created by <strong>{{ event.user.name }}</strong>
-        </p>
-        <p>
-          {{ event.description }}
-          <br>
-          <RouterLink :to="{name: 'showEvent', params: {id: event.id}}" class="text-blue-500 underline">Go to event</RouterLink>
-        </p>
+    <table v-if="events.length" class="w-full border-collapse">
+      <thead>
+        <tr>
+          <th class="border-b border-gray-300 p-2">Name</th>
+          <th class="border-b border-gray-300 p-2">Author</th>
+          <th class="border-b border-gray-300 p-2">Status</th>
+          <th class="border-b border-gray-300 p-2">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="event in events" :key="event.id">
+          <td class="border-b border-gray-300 p-2">{{ event.name }}</td>
+          <td class="border-b border-gray-300 p-2">{{ event.user.name }}</td>
+          <td class="border-b border-gray-300 p-2">{{ event.status }}</td>
+          <td class="border-b border-gray-300 p-2">
+            <div class="flex items-center justify-end space-x-4 mt-4">
+              <RouterLink :to="{name: 'showEvent', params: {id: event.id}}" class="border border-blue-500 text-blue-500 px-3 py-1 hover:bg-blue-500 hover:text-white">Show</RouterLink>
 
-        <div class="flex items-center space-x-4 mt-4">
-          <form v-if="authStore.user && authStore.user.id === event.user_id" @submit.prevent="deleteEvent(event)">
-            <button class="border border-red-500 text-red-500 px-4 py-2 hover:bg-red-500 hover:text-white" type="submit">Delete</button>
-          </form>
+              <RouterLink v-if="authStore.user && authStore.user.id === event.user_id" :to="{ name: 'updateEvent', params: {id: event.id} }" class="border border-green-500 text-green-500 px-3 py-1 hover:bg-green-500 hover:text-white">Edit</RouterLink>
 
-          <RouterLink v-if="authStore.user && authStore.user.id === event.user_id" :to="{ name: 'updateEvent', params: {id: event.id} }" class="border border-green-500 text-green-500 px-4 py-2 hover:bg-green-500 hover:text-white">Update</RouterLink>
-        </div>
-      </div>
-    </div>
+              <form v-if="authStore.user && authStore.user.id === event.user_id" @submit.prevent="deleteEvent(event)">
+                <button class="border border-red-500 text-red-500 px-3 py-1 hover:bg-red-500 hover:text-white" type="submit">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
     <div v-else>
       <h2>There are no events.</h2>
     </div>

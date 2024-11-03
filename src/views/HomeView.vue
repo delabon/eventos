@@ -6,7 +6,8 @@
       <div v-for="event in events" :key="event.id" class="border-l-4 border-blue-500 pl-4 mb-8">
         <h2 class="font-bold text-xl">{{ event.name }}</h2>
         <p class="text-xs text-slate-600 mb-4">
-          Created by <strong>{{ event.user.name }}</strong>
+          Created by <strong>{{ event.user.name }}</strong><br>
+          Status <strong>{{ event.status }}</strong>
         </p>
         <p>
           {{ event.description }}

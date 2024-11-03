@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTicketTypeRequest;
 use App\Http\Requests\UpdateTicketTypeRequest;
+use App\Models\Event;
 use App\Models\TicketType;
 use Illuminate\Database\Eloquent\Collection;
 
 class TicketTypeController extends Controller
 {
-    public function index(): Collection
+    public function index(Event $event): Collection
     {
-        return TicketType::all();
+        return $event->ticketTypes;
     }
 
     public function store(StoreTicketTypeRequest $request): TicketType

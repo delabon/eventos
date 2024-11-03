@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EventStatus;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
@@ -12,7 +13,7 @@ class EventController extends Controller
 {
     public function index(): Collection
     {
-        return Event::with('user')->latest()->get();
+        return Event::with('user')->where('status', '!=', EventStatus::Draft->value)->latest()->get();
     }
 
     public function myEvents(Request $request): Collection
