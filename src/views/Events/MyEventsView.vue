@@ -22,7 +22,7 @@
 
               <RouterLink v-if="authStore.user && authStore.user.id === event.user_id" :to="{ name: 'updateEvent', params: {id: event.id} }" class="border border-green-500 text-green-500 px-3 py-1 hover:bg-green-500 hover:text-white">Edit</RouterLink>
 
-              <form v-if="authStore.user && authStore.user.id === event.user_id" @submit.prevent="deleteEvent(event)">
+              <form v-if="authStore.user && authStore.user.id === event.user_id" @submit.prevent="handleDeleteEvent(event)">
                 <button class="border border-red-500 text-red-500 px-3 py-1 hover:bg-red-500 hover:text-white" type="submit">Delete</button>
               </form>
             </div>
@@ -50,4 +50,10 @@ const events = ref([])
 onMounted(async () => {
   events.value = await getMyEvents()
 })
+
+const handleDeleteEvent = (event) => {
+    if (confirm('Are you sure?')) {
+        deleteEvent(event)
+    }
+}
 </script>
