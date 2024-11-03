@@ -69,4 +69,9 @@ class AuthController extends Controller
             'email' => $request->user()->email,
         ];
     }
+
+    public function me(Request $request): array
+    {
+        return $this->user($request);
+    }
 }

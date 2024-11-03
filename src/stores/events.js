@@ -5,7 +5,9 @@ async function createTicketType (ticketType) {
     await fetch('/api/ticket-types', {
         method: 'post',
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(ticketType)
     });
@@ -15,7 +17,9 @@ async function updateTicketType (ticketType) {
     await fetch(`/api/ticket-types/${ticketType.id}`, {
         method: 'put',
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(ticketType)
     });
@@ -29,7 +33,11 @@ export const useEventsStore = defineStore('eventsStore', {
     actions: {
         async getEvents () {
             const res = await fetch('/api/events', {
-                method: 'get'
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
             });
             const data = await res.json();
 
@@ -41,7 +49,9 @@ export const useEventsStore = defineStore('eventsStore', {
             const res = await fetch('/api/events/mine', {
                 method: 'get',
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
             });
             const data = await res.json();
@@ -52,7 +62,11 @@ export const useEventsStore = defineStore('eventsStore', {
         },
         async getTicketTypes (eventId) {
             const res = await fetch(`/api/ticket-types/${eventId}`, {
-                method: 'get'
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
             });
             const data = await res.json();
 
@@ -64,7 +78,11 @@ export const useEventsStore = defineStore('eventsStore', {
         },
         async getEvent (id) {
             const res = await fetch(`/api/events/${id}`, {
-                method: 'get'
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
             });
             const data = await res.json();
 
@@ -76,7 +94,9 @@ export const useEventsStore = defineStore('eventsStore', {
             const res = await fetch('/api/events', {
                 method: 'post',
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });
@@ -108,7 +128,9 @@ export const useEventsStore = defineStore('eventsStore', {
             const res = await fetch(`/api/events/${event.id}`, {
                 method: 'delete',
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
             });
 
@@ -133,7 +155,9 @@ export const useEventsStore = defineStore('eventsStore', {
             const res = await fetch(`/api/events/${eventData.id}`, {
                 method: 'put',
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });

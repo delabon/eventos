@@ -5,10 +5,14 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketTypeController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/health', function () {
+    return 'true';
+});
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::delete('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/mine', [EventController::class, 'myEvents'])->middleware('auth:sanctum');
