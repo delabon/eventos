@@ -53,12 +53,12 @@
                 <div class="grid grid-cols-2 gap-6">
             <div>
                 <strong>Start date</strong>
-                <input type="datetime-local" v-model="formData.start_at" class="w-full border rounded p-1">
+                <input id="event-start-at" type="datetime-local" v-model="formData.start_at" class="w-full border rounded p-1">
                 <p v-if="errors.start_at" class="error">{{ errors.start_at[0] }}</p>
             </div>
             <div>
                 <strong>End date</strong>
-                <input id="event-ent-at" type="datetime-local" v-model="formData.end_at"
+                <input id="event-end-at" type="datetime-local" v-model="formData.end_at"
                        class="w-full border rounded p-1">
                 <p v-if="errors.end_at" class="error">{{ errors.end_at[0] }}</p>
             </div>
@@ -75,10 +75,11 @@
 </template>
 
 <script setup>
-import {reactive, ref, watch} from 'vue';
+import {onMounted, reactive, ref, watch} from 'vue';
 import { useEventsStore } from '@/stores/events.js';
 import { storeToRefs } from 'pinia';
 import TicketTypes from '@/components/TicketTypes.vue';
+import {watchStartEndDates} from "@/utils/watchStartEndDates.js";
 
 const formData = reactive({
     name: '',
@@ -96,13 +97,15 @@ const { createEvent } = useEventsStore();
 const ticketTypes = ref([]);
 let hasValidationErrors = ref(false);
 
-watch(() => formData.start_at, (newStartAt) => {
-    if (formData.end_at < newStartAt) {
-        formData.end_at = '';
-    }
+onMounted(() => {
+    const date = new Date();
+    const format = 'Y-m-d\\TH:i';
 
-    document.querySelector('#event-ent-at').min = newStartAt;
-});
+    document.querySelector('#event-start-at').min = date.format(format);
+    document.querySelector('#event-end-at').min = date.format(format);
+})
+
+watch(() => formData.start_at, watchStartEndDates(formData));
 
 const handleSubmit = () => {
     if (validateEvent()) {

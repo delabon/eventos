@@ -1,4 +1,5 @@
 import './assets/main.css'
+import './utils/date.format.js';
 
 import {createApp, markRaw} from 'vue'
 import { createPinia } from 'pinia'
