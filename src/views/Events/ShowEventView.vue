@@ -5,7 +5,7 @@
     </div>
     <main>
         <div v-if="event">
-            <div class="border-l-4 border-blue-500 pl-4 mt-12">
+            <div class="border-l-4 border-black pl-4 mt-12">
                 <h1 class="font-bold text-3xl">{{ event.name }}</h1>
                 <p class="text-xs text-slate-600 my-4">
                     Created by <strong>{{ event.user.name }}</strong><br>
@@ -22,7 +22,7 @@
                 <h3 class="font-bold text-xl">Ticket types</h3>
 
                 <div class="grid grid-cols-4 gap-7 mt-6">
-                    <div v-for="ticketType in ticketTypes" class="border-l-4 border-blue-500 pl-4 mt-6">
+                    <div v-for="ticketType in ticketTypes" class="border-l-4 border-black pl-4 mt-6">
                         <strong>{{ ticketType.name }}</strong>
                         <p>Price: ${{ ticketType.price }}</p>
                         <p>Quantity: {{ ticketType.quantity }}</p>
