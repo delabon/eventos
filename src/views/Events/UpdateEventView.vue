@@ -2,7 +2,7 @@
     <main>
         <h1 class="title">Update event</h1>
 
-        <EventForm :formData="formData" :ticketTypes="ticketTypes" @submit="handleSubmit" @update:ticketTypes="updateTicketTypes"/>
+        <EventForm :formData="formData" :ticketTypes="ticketTypes" @submit="handleSubmit" @update:ticketTypes="updateTicketTypes" @update:cover-image="updateCoverImage"/>
     </main>
 </template>
 
@@ -24,7 +24,8 @@ const formData = reactive({
     city: '',
     postal_code: '',
     start_at: '',
-    end_at: ''
+    end_at: '',
+    cover_image: null
 });
 const ticketTypes = ref([]);
 const {updateEvent, getEvent, getTicketTypes} = useEventsStore();
@@ -57,6 +58,7 @@ onMounted(async () => {
     formData.postal_code = eventObj.postal_code;
     formData.start_at = formatDateToLocalInput(eventObj.start_at);
     formData.end_at = formatDateToLocalInput(eventObj.end_at);
+    formData.cover_image = eventObj.cover_image;
 
     eventData.value.id = eventObj.id;
     eventData.value.user_id = eventObj.user_id;
@@ -87,5 +89,9 @@ const handleSubmit = () => {
 
 const updateTicketTypes = (newTicketTypes) => {
     ticketTypes.value = newTicketTypes;
+};
+
+const updateCoverImage = (coverImage) => {
+    formData.cover_image = coverImage;
 };
 </script>

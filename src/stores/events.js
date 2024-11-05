@@ -87,8 +87,14 @@ export const useEventsStore = defineStore('eventsStore', {
             const data = await res.json();
 
             if (res.ok) {
+                if (data.event.cover_image) {
+                    data.event.cover_image = `/assets/${data.event.cover_image}`;
+                }
+
                 return data.event
             }
+
+            return null;
         },
         async createEvent (formData, ticketTypes){
             const res = await fetch('/api/events', {

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\EventStatus;
+use App\Rules\Base64Image;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -33,6 +34,7 @@ class StoreEventRequest extends FormRequest
             'postal_code' => ['required', 'max:255'],
             'start_at' => ['required', 'date'],
             'end_at' => ['required', 'date'],
+            'cover_image' => ['required', new Base64Image(Base64Image::SIZE_2MB)],
         ];
     }
 }

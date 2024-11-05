@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('postal_code');
             $table->dateTime('start_at');
             $table->dateTime('end_at');
+            $table->string('cover_image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
