@@ -1,4 +1,5 @@
 <template>
+    <div v-if="event && event.cover_image" class="w-full" :style="{ backgroundImage: `url(${event.cover_image})`, height: '40vh', backgroundSize: 'cover', backgroundPosition: 'center center' }"></div>
     <main>
         <div v-if="event">
             <div class="border-l-4 border-blue-500 pl-4 mt-12">
