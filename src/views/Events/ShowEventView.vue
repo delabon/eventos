@@ -1,5 +1,8 @@
 <template>
     <div v-if="event && event.cover_image" class="w-full" :style="{ backgroundImage: `url(${event.cover_image})`, height: '40vh', backgroundSize: 'cover', backgroundPosition: 'center center' }"></div>
+    <div v-if="event">
+        <CountdownTimer :targetDate="new Date(event.start_at)" />
+    </div>
     <main>
         <div v-if="event">
             <div class="border-l-4 border-blue-500 pl-4 mt-12">
@@ -24,7 +27,7 @@
                         <p>Price: ${{ ticketType.price }}</p>
                         <p>Quantity: {{ ticketType.quantity }}</p>
                         <p>Max tickets per person: {{ ticketType.max_quantity_per_person }}</p>
-                        <button class="primary-btn mt-3" @click.prevent="reserveTicket">Reserve</button>
+                        <button class="primary-btn mt-3" @click.prevent="reserveTicket">Get Ticket</button>
                     </div>
                 </div>
             </div>
@@ -39,6 +42,7 @@
 import {onMounted, ref} from "vue";
 import {useEventsStore} from "@/stores/events.js";
 import {useRoute} from "vue-router";
+import CountdownTimer from "@/components/CountdownTimer.vue";
 
 const route = useRoute()
 const {getEvent, getTicketTypes} = useEventsStore();

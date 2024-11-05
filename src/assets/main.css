@@ -25,7 +25,7 @@
     @apply block text-sm font-medium leading-6 text-slate-900 first-letter:capitalize;
   }
   header {
-    @apply bg-slate-800 shadow-md;
+    @apply bg-black shadow-md;
   }
   nav {
     @apply p-5 max-w-screen-lg mx-auto flex items-center justify-between;
